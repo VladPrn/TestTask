@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TestTask</string>
+    <string name="error">Что-то пошло не так</string>
+</resources>
