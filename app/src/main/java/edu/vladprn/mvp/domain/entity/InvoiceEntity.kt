@@ -1,6 +1,6 @@
-package edu.vladprn.mvp.data.entity
+package edu.vladprn.mvp.domain.entity
 
-data class Invoice(
+data class InvoiceEntity(
     val id: Int,
     val name: String,
     val cards: List<Int>

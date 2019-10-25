@@ -1,14 +1,17 @@
 package edu.vladprn.mvp.data.mapper
 
-import edu.vladprn.mvp.data.entity.Invoice
-import edu.vladprn.mvp.screen.main.domain.model.InvoiceModel
+import edu.vladprn.mvp.data.model.Invoice
+import edu.vladprn.mvp.domain.entity.InvoiceEntity
+import javax.inject.Inject
 
-fun Invoice.toModel() =
-    InvoiceModel(
-        id = id,
-        name = name,
-        cards = cards
-    )
+class InvoiceMapper @Inject constructor() {
+    fun mapToEntity(invoice: Invoice) =
+        InvoiceEntity(
+            id = invoice.id,
+            name = invoice.name,
+            cards = invoice.cards
+        )
 
-fun List<Invoice>.toModels() =
-    map { it.toModel() }
+    fun mapToEntities(invoices: List<Invoice>) =
+        invoices.map { mapToEntity(it) }
+}

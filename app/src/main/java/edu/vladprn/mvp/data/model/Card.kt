@@ -1,4 +1,4 @@
-package edu.vladprn.mvp.data.entity
+package edu.vladprn.mvp.data.model
 
 data class Card(
     val id: Int,

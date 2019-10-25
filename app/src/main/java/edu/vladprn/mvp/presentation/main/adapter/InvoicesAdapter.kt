@@ -1,15 +1,15 @@
-package edu.vladprn.mvp.screen.main.adapter
+package edu.vladprn.mvp.presentation.main.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import edu.vladprn.mvp.R
-import edu.vladprn.mvp.screen.main.domain.model.InvoiceModel
+import edu.vladprn.mvp.domain.entity.InvoiceEntity
 import kotlinx.android.synthetic.main.item_invoice.view.*
 
 class InvoicesAdapter(
-    private val items: List<InvoiceModel>,
+    private val items: List<InvoiceEntity>,
     private val listener: ClickListener
 ) : RecyclerView.Adapter<InvoicesAdapter.InvoicesViewHolder>() {
 
@@ -26,7 +26,7 @@ class InvoicesAdapter(
     }
 
     inner class InvoicesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(invoice: InvoiceModel) {
+        fun bind(invoice: InvoiceEntity) {
             itemView.apply {
                 text.text = invoice.name
                 setOnClickListener { listener.onInvoiceClick(invoice) }
@@ -35,6 +35,6 @@ class InvoicesAdapter(
     }
 
     interface ClickListener {
-        fun onInvoiceClick(item: InvoiceModel)
+        fun onInvoiceClick(item: InvoiceEntity)
     }
 }

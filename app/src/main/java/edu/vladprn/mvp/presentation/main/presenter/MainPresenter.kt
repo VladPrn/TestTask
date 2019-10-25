@@ -1,17 +1,19 @@
-package edu.vladprn.mvp.screen.main.presentation.presenter
+package edu.vladprn.mvp.presentation.main.presenter
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import edu.vladprn.mvp.R
-import edu.vladprn.mvp.screen.main.domain.interactor.MainInteractor
-import edu.vladprn.mvp.screen.main.domain.model.InvoiceModel
-import edu.vladprn.mvp.screen.main.presentation.view.MainView
+import edu.vladprn.mvp.domain.entity.InvoiceEntity
+import edu.vladprn.mvp.domain.interactor.CardInteractor
+import edu.vladprn.mvp.domain.interactor.InvoiceInteractor
+import edu.vladprn.mvp.presentation.main.view.MainView
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 @InjectViewState
 class MainPresenter @Inject constructor(
-    private val interactor: MainInteractor
+    private val invoiceInteractor: InvoiceInteractor,
+    private val cardInteractor: CardInteractor
 ) : MvpPresenter<MainView>() {
 
     private val compositeDisposable = CompositeDisposable()
@@ -22,7 +24,7 @@ class MainPresenter @Inject constructor(
     }
 
     fun getInvoices() {
-        interactor.getInvoices()
+        invoiceInteractor.getInvoices()
             .subscribe({
                 viewState.onLoadInvoices(it)
                 if (it.isNotEmpty()) {
@@ -34,8 +36,8 @@ class MainPresenter @Inject constructor(
             .let { compositeDisposable.add(it) }
     }
 
-    fun onInvoiceClick(invoice: InvoiceModel) {
-        interactor.getCardsByInvoice(invoice)
+    fun onInvoiceClick(invoice: InvoiceEntity) {
+        cardInteractor.getCardsByInvoice(invoice)
             .subscribe(viewState::onLoadCards) {
                 viewState.showError(R.string.error)
             }

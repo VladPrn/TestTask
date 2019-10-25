@@ -1,4 +1,4 @@
-package edu.vladprn.mvp.screen.main.presentation.view
+package edu.vladprn.mvp.presentation.main.view
 
 import android.os.Bundle
 import android.widget.Toast
@@ -6,12 +6,12 @@ import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import edu.vladprn.mvp.R
-import edu.vladprn.mvp.data.moduls.MainModule
-import edu.vladprn.mvp.screen.main.adapter.CardsAdapter
-import edu.vladprn.mvp.screen.main.adapter.InvoicesAdapter
-import edu.vladprn.mvp.screen.main.domain.model.CardModel
-import edu.vladprn.mvp.screen.main.domain.model.InvoiceModel
-import edu.vladprn.mvp.screen.main.presentation.presenter.MainPresenter
+import edu.vladprn.mvp.data.di.MainModule
+import edu.vladprn.mvp.presentation.main.adapter.CardsAdapter
+import edu.vladprn.mvp.presentation.main.adapter.InvoicesAdapter
+import edu.vladprn.mvp.domain.entity.CardEntity
+import edu.vladprn.mvp.domain.entity.InvoiceEntity
+import edu.vladprn.mvp.presentation.main.presenter.MainPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 import toothpick.Toothpick
 import javax.inject.Inject
@@ -35,15 +35,15 @@ class MainActivity : MvpAppCompatActivity(), MainView, InvoicesAdapter.ClickList
         setContentView(R.layout.activity_main)
     }
 
-    override fun onLoadInvoices(invoices: List<InvoiceModel>) {
+    override fun onLoadInvoices(invoices: List<InvoiceEntity>) {
         rvInvoices.adapter = InvoicesAdapter(invoices, this)
     }
 
-    override fun onInvoiceClick(item: InvoiceModel) {
+    override fun onInvoiceClick(item: InvoiceEntity) {
         presenter.onInvoiceClick(item)
     }
 
-    override fun onLoadCards(cards: List<CardModel>) {
+    override fun onLoadCards(cards: List<CardEntity>) {
         rvCards.adapter = CardsAdapter(cards)
     }
 

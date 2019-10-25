@@ -1,15 +1,25 @@
 package edu.vladprn.mvp.data.mapper
 
-import edu.vladprn.mvp.data.entity.Card
-import edu.vladprn.mvp.screen.main.domain.model.CardModel
-import edu.vladprn.mvp.screen.main.domain.model.CardType
+import edu.vladprn.mvp.data.model.Card
+import edu.vladprn.mvp.domain.entity.CardEntity
+import edu.vladprn.mvp.domain.entity.CardTypeEntity
+import javax.inject.Inject
 
-fun Card.toModel() =
-    CardModel(
-        id = id,
-        name = name,
-        type = CardType.fromServerInt(category)
-    )
+class CardMapper @Inject constructor() {
+    fun mapToEntity(card: Card) =
+        CardEntity(
+            id = card.id,
+            name = card.name,
+            type = mapServerIntToType(card.category)
+        )
 
-fun List<Card>.toModels() =
-    map { it.toModel() }
+    fun mapToEntities(cards: List<Card>) =
+        cards.map { mapToEntity(it) }
+
+    private fun mapServerIntToType(value: Int) =
+        when (value) {
+            0 -> CardTypeEntity.CREDIT
+            1 -> CardTypeEntity.DEBIT
+            else -> CardTypeEntity.UNKNOWN
+        }
+}

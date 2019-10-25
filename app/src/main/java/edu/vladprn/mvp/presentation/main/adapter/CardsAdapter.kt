@@ -1,15 +1,15 @@
-package edu.vladprn.mvp.screen.main.adapter
+package edu.vladprn.mvp.presentation.main.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import edu.vladprn.mvp.R
-import edu.vladprn.mvp.screen.main.domain.model.CardModel
+import edu.vladprn.mvp.domain.entity.CardEntity
 import kotlinx.android.synthetic.main.item_card.view.*
 
 class CardsAdapter(
-    private val items: List<CardModel>
+    private val items: List<CardEntity>
 ) : RecyclerView.Adapter<CardsAdapter.CardsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardsViewHolder {
@@ -25,7 +25,7 @@ class CardsAdapter(
     }
 
     class CardsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(card: CardModel) {
+        fun bind(card: CardEntity) {
             itemView.apply {
                 text.text = card.name
                 icon.setBackgroundResource(card.type.drawable)
